@@ -3,10 +3,10 @@
 #include <string>
 #include <sstream>
 
-
 using namespace std;
 
 int main(){
+    //Reading
     ifstream inputFile;
     inputFile.open("C:\\Users\\crdie\\Documents\\1Semestre_ITESM\\Pensamiento Computacional Orientado a Objetos\\Scripts\\situacionProblema\\FileThings\\data.csv");
     string line = "";
@@ -36,6 +36,13 @@ int main(){
     inputFile.close();
 
     cout<<"Hi"<<endl;
+    //Writing
+    /*
+    ofstream file;
+    file.open("C:\\Users\\crdie\\Documents\\1Semestre_ITESM\\Pensamiento Computacional Orientado a Objetos\\Scripts\\situacionProblema\\FileThings\\data.csv", ios_base::app);
+    file<<"d5"<<","<<"pfdsdf"<<","<<"26"<<","<<"8"<<endl;
+    file.close();
 
     return 0;
+    */
 }
