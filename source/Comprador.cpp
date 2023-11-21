@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string> 
 
-
 Comprador::Comprador(){
     direccion = "directions";
     telefono1 = "0000000000";
