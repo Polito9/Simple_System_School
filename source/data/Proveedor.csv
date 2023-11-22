@@ -1,2 +1,2 @@
-Username,Nombre,Apellido,Password,Rol,UbicacionSucursal,Telefono
-provedorcito2,Pedro,Perez Piedras,pass1234,proveedor,Pascual Rubio No. 51,5545875222
+Username,Password,Apellido,Nombre,Rol,UbicacionSucursal,Telefono
+provedorcito2,pass1234,Perez Piedras,Pedro,proveedor,Pascual Rubio No. 51,5545875222
