@@ -20,10 +20,12 @@ class SaverMannager{
         bool recordProducto(Producto producto);
 
         std::vector<std::string> getIds_productos();
-
+        Producto searchProducto(std::string id_producto, std::string user, bool compra);
         Proveedor searchProveedor(std::string provedor);
         Comprador searchComprador(std::string comprador);
+        void editProducto(Producto producto);
         void printProductsByProveedor(std::string user_proveedor);
+        std::vector<std::string> printProductsByCategoria(std::string categoria);
         bool validateCredentials(std::string username, std::string password, std::string path);
 };
 

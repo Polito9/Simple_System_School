@@ -85,6 +85,7 @@ Proveedor SaverMannager::searchProveedor(std:: string proveedor){
             }
             getline(inputString, data[6], '\n');
             Proveedor proveedor_obj = Proveedor(data[0], data[4], data[2], data[3], data[1], data[5], data[6]);
+            inputFile.close();
             return proveedor_obj;
         }
         line = "";
@@ -113,6 +114,7 @@ Comprador SaverMannager::searchComprador(std:: string comprador){
             {
                 float moneyValue = std::stof(money);
                 Comprador comprador_obj = Comprador(data[0], data[4], data[2], data[3], data[1], data[5], data[6], data[7], moneyValue);
+                inputFile.close();
                 return comprador_obj;
             }
             catch(const std::exception& e)
@@ -125,9 +127,87 @@ Comprador SaverMannager::searchComprador(std:: string comprador){
     inputFile.close();
 }
 
+Producto SaverMannager::searchProducto(std:: string id_producto, std::string username, bool compra){
+    std::ifstream inputFile;
+    inputFile.open(path);
+    std::string line = "";
+    std::string data[6];
+    std::string stock_s;
+    std::string precio_s;
+    while(getline(inputFile, line)){
+        std::stringstream inputString(line);
+        getline(inputString, data[0], ',');
+
+        if (data[0] == id_producto){
+            for(int i = 1;i<5;i++){
+                getline(inputString, data[i], ',');
+            }
+            getline(inputString, stock_s, ',');
+            getline(inputString, precio_s, ',');
+            getline(inputString, data[5], '\n');
+            if(data[5] != username && !compra){
+                break;
+            }
+            try
+            {
+                int stock = std::stoi(stock_s);
+                float precio = std::stof(precio_s);
+                Producto producto = Producto(data[0], data[1], data[2], data[3], data[4], stock, precio, data[5]);
+                inputFile.close();
+                return producto;
+            }
+            catch(const std::exception& e)
+            {
+                std::cerr << "Ha ocurrido un error: " << e.what() << std::endl;
+            }
+        }
+        line = "";
+    }
+    Producto producto = Producto();
+    inputFile.close();
+    return producto;
+}
+
+void SaverMannager::editProducto(Producto producto){
+    std::ifstream inputFile;
+    inputFile.open(path);
+    std::ofstream outputFile("nuevo_archivo.csv");
+    std::string value;
+    std::string line = "";
+    while(getline(inputFile, line)){
+        std::stringstream inputString(line);
+        getline(inputString, value, ',');
+        if(value != producto.getId()){
+            outputFile<<value<<",";
+            for(int i = 0;i<6;i++){
+                getline(inputString, value, ',');
+                outputFile<<value<<",";
+            }
+            getline(inputString, value, ',');
+            outputFile<<value<<"\n";
+        }
+    }
+    std::string values[] = {producto.getId(), producto.getNombre(), producto.getCategoria(), producto.getMarca(), producto.getOtros_detalles()};
+    // Escribir las columnas del objeto en el nuevo archivo
+    for (int i = 0; i < 5; i++) {
+        outputFile << values[i];
+        outputFile << ",";
+    }
+    outputFile<<std::to_string(producto.getStock())<<",";
+    outputFile<<std::to_string(producto.getPrecio())<<",";
+    outputFile<<producto.getUser_proveedor()<<"\n";
+    inputFile.close();
+    outputFile.close();
+
+    // Opcional: reemplazar el archivo original con el nuevo
+    std::remove("Productos.csv");
+    std::rename("nuevo_archivo.csv", "Productos.csv");
+}
+
+
 void SaverMannager::printProductsByProveedor(std:: string user_proveedor){
     std::ifstream inputFile;
-    std::string strings_names []= {"Id:", "Nombre: ", "Categioria: ", "Marca", "Otros detalles: "};
+    std::string strings_names []= {"Id:", "Nombre: ", "Categioria: ", "Marca: ", "Otros detalles: "};
     inputFile.open(path);
     std::string line = "";
     std::string data[5];
@@ -148,6 +228,7 @@ void SaverMannager::printProductsByProveedor(std:: string user_proveedor){
         getline(inputString, user_prov, '\n');
 
         if (user_prov == user_proveedor){
+            std::cout<<std::endl;
             for(int i = 0;i<5;i++){
                 std::cout<<strings_names[i]<<data[i]<<std::endl;
             }
@@ -155,7 +236,45 @@ void SaverMannager::printProductsByProveedor(std:: string user_proveedor){
             std::cout<<"Precio: "<<precio_s<<std::endl<<std::endl;
         }
     }
+    inputFile.close();
 }
+
+std::vector<std::string> SaverMannager::printProductsByCategoria(std::string categoria){
+    std::ifstream inputFile;
+    std::string strings_names []= {"Id:", "Nombre: ", "Categioria: ", "Marca: ", "Otros detalles: "};
+    inputFile.open(path);
+    std::string line = "";
+    std::string data[5];
+    std::string stock_s;
+    std::string precio_s;
+    std::vector<std::string> id_s;
+    int stock;
+    float precio;
+    while(getline(inputFile, line)){
+        std::stringstream inputString(line);
+        for(int i = 0;i<5;i++){
+            getline(inputString, data[i], ',');
+        }
+        if (data[2] == categoria){
+            id_s.push_back(data[0]);
+            getline(inputString, stock_s, ',');
+            getline(inputString, precio_s, ',');
+            precio = std::stof(precio_s);;
+            std::cout<<std::endl;
+            for(int i = 0;i<5;i++){
+                std::cout<<strings_names[i]<<data[i]<<std::endl;
+            }
+            std::cout<<"Precio: "<<precio_s<<std::endl<<std::endl;
+        }
+        
+
+        
+    }
+    return id_s;
+    inputFile.close();
+}
+
+
 std::vector<std::string> SaverMannager::getIds_productos(){
     std::ifstream inputFile;
     inputFile.open(path);
@@ -168,6 +287,7 @@ std::vector<std::string> SaverMannager::getIds_productos(){
         getline(inputString, id, ',');
         id_s.push_back(id);
     }
+    inputFile.close();
     return id_s;
 }
 
@@ -185,6 +305,7 @@ bool SaverMannager::validateCredentials(std::string username, std::string passwo
         getline(inputString, pass, ',');
 
         if(user == username && pass == password){
+            inputFile.close();
             return true;
         }
     }
