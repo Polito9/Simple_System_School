@@ -116,15 +116,22 @@ int main() {
                             }
                             //Buscar el producto en productos.csv
                             Producto producto_compra = saver.searchProducto(opt_cat, actual_user, true);
-                            //Disminuyo el valor de dinero en comprador validando si tiene suficiente dinero
+                            //Validar si tiene suficiente dinero
                             if(comprador.getDinero()>=producto_compra.getPrecio()){
                                 if(producto_compra.getStock()>0){
+                                    //Se resta el valor de dinero del comprador
+                                    comprador.setDinero(comprador.getDinero()-producto_compra.getPrecio());
                                     //Se agregan los id a comprador-producto
-
+                                    saver.setPath(pathCompra_Product);
+                                    saver.recordCompra(opt_cat, actual_user);
                                     //Se actualiza el valor de dinero en comprador.csv
-
+                                    saver.setPath(pathComprador);
+                                    saver.editComprador(comprador);
                                     //Se actualiza el valor de stock en Productos.csv
-                                    
+                                    producto_compra.setStock(producto_compra.getStock()-1);
+                                    saver.setPath(pathProducto);
+                                    saver.editProducto(producto_compra);
+                                    cout<<"Producto comprado!"<<endl;
                                 }
                                 else{
                                     cout<<"Ya no hay mas existencias de ese producto"<<endl;
@@ -132,14 +139,21 @@ int main() {
                             }else{
                                 cout<<"No cuentas con suficiente dinero para esta compra ):"<<endl;
                                 cout<<"Tu saldo es de: "<<comprador.getDinero()<<endl;
-                                cout<<"El producto cuesta: "<<producto_compra.getPrecio(    )<<endl;
+                                cout<<"El producto cuesta: "<<producto_compra.getPrecio()<<endl;
                             }
                             break;
                         }else if(interal_opt == "2"){//Mostrar historial de compra
-
+                            saver.setPath(pathCompra_Product);
+                            saver.printProductsByComprador(actual_user);
                             break;
                         }else if(interal_opt =="3"){//Actualizar dinero
-
+                            float dinero = 0.0f;
+                            cout<<"Tu saldo es de: "<<comprador.getDinero()<<endl;
+                            cout<<"Ingresa tu nuevo saldo: "<<endl;
+                            cin>>dinero;
+                            comprador.setDinero(dinero);
+                            saver.setPath(pathComprador);
+                            saver.editComprador(comprador);
                             break;
                         }else{
                             cout<<"No valido, intentalo de nuevo"<<endl;
@@ -250,7 +264,7 @@ int main() {
                                         cin.ignore();
                                         getline(cin, new_value);
                                         producto.setNombre(new_value);
-                                    }else if(opt_editar == "2"){
+                                    }else if(opt_editar == "2"){//Arreglar bug
                                         while(true){
                                             cout<<"Digita la nueva categoria: ";
                                             cin.ignore();
@@ -325,11 +339,11 @@ int main() {
                             break;
                         }
                         else{
-                            cout<<"No valido, intentalo de nuevo"<<endl;       
+                            cout<<"No valido, intentalo de nuevo"<<endl;    
                         }
                     }
                 }
-                cout<<"Deseas realizar otra operacion? (S/N): ";
+                cout<<endl<<"Deseas realizar otra operacion? (S/N): ";
                 cin>>user_opt;
                 if (user_opt != "S"){
                     break;

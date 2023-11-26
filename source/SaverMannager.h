@@ -14,18 +14,22 @@ class SaverMannager{
 
         void setPath(std::string path);
         std::string getPath();
-        bool recordProveedor(Proveedor proveedor);
-        bool recordComprador(Comprador comprador);
+        void recordProveedor(Proveedor proveedor);
+        void recordComprador(Comprador comprador);
         //bool recordAdministrador(Administrador administrador);
-        bool recordProducto(Producto producto);
+        void recordProducto(Producto producto);
+        void recordCompra(std::string id_producto, std::string usarname_compra);
+        
 
         std::vector<std::string> getIds_productos();
         Producto searchProducto(std::string id_producto, std::string user, bool compra);
         Proveedor searchProveedor(std::string provedor);
         Comprador searchComprador(std::string comprador);
         void editProducto(Producto producto);
+        void editComprador(Comprador comprador);
         void printProductsByProveedor(std::string user_proveedor);
         std::vector<std::string> printProductsByCategoria(std::string categoria);
+        void printProductsByComprador(std::string comprador);
         bool validateCredentials(std::string username, std::string password, std::string path);
 };
 

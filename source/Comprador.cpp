@@ -8,7 +8,7 @@ Comprador::Comprador(){
     telefono2 = "0000000000";
     dinero = 0.0f;
 }
-Comprador::Comprador(std::string username, std::string name, std::string last_name, std::string password, std::string role, std::string direccion, std::string telefono1, std::string telefono2, float dinero){
+Comprador::Comprador(std::string username, std::string password, std::string last_name, std::string name, std::string role, std::string direccion, std::string telefono1, std::string telefono2, float dinero){
     setUsername(username);
     setName(name);
     setLast_name(last_name);
