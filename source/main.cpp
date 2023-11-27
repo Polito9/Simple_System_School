@@ -13,7 +13,7 @@ int main() {
     string pathComprador = "C:\\Users\\crdie\\Documents\\1Semestre_ITESM\\Pensamiento Computacional Orientado a Objetos\\Scripts\\situacionProblema\\source\\Comprador.csv";
     string pathProducto = "C:\\Users\\crdie\\Documents\\1Semestre_ITESM\\Pensamiento Computacional Orientado a Objetos\\Scripts\\situacionProblema\\source\\Productos.csv";
     string pathCompra_Product = "C:\\Users\\crdie\\Documents\\1Semestre_ITESM\\Pensamiento Computacional Orientado a Objetos\\Scripts\\situacionProblema\\source\\Comprador-Productos.csv";
-    string aa;
+    string aux_exit;
     //Mapa para los path
     map<string, string> mapaPath;
     mapaPath["C"] = pathComprador;
@@ -179,6 +179,7 @@ int main() {
                             string producto_arr[7];
                             string string_values[]= {"Id: ", "Nombre: ", "Siglas de categoria: ", "Marca: ", "Otros detalles: ", "Stock: ", "Precio: "};
                             while (true){
+                                cout<<"Presiona enter para continuar"<<endl;
                                 cin.ignore();
                                 cout<<"----REGISTRO DE NUEVO PRODUCTO----"<<endl;
                                 //Validando el id repetido
@@ -352,6 +353,7 @@ int main() {
         break;
     }
     cout<<"Gracias por usar Amaxion!"<<endl<<"Hasta luego!";
-    cin>>aa;
+    
+    cin>>aux_exit;//Para que no cierre el programa al mostrar el último mensaje
     return 0;
 }

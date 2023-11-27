@@ -5,13 +5,13 @@
 #include "Proveedor.h"
 #include "Comprador.h"
 #include "Producto.h"
+
 class SaverMannager{
     private:
         std::string path;
     public:
         SaverMannager();
         SaverMannager(std::string path);
-
         void setPath(std::string path);
         std::string getPath();
         void recordProveedor(Proveedor proveedor);

@@ -15,8 +15,6 @@ class Proveedor: public User{
 
         void setUbicacion_sucursal(std::string ubicacion_sucursal);
         void setTelefono(std::string telefono);
-
-        bool recordObjectToFile();
 };
 
 #endif
