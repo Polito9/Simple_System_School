@@ -11,13 +11,11 @@ using namespace std;
 int main() {
     string pathProveedor = "C:\\Users\\crdie\\Documents\\1Semestre_ITESM\\Pensamiento Computacional Orientado a Objetos\\Scripts\\situacionProblema\\source\\Proveedor.csv";
     string pathComprador = "C:\\Users\\crdie\\Documents\\1Semestre_ITESM\\Pensamiento Computacional Orientado a Objetos\\Scripts\\situacionProblema\\source\\Comprador.csv";
-    string pathAdmin = "C:\\Users\\crdie\\Documents\\1Semestre_ITESM\\Pensamiento Computacional Orientado a Objetos\\Scripts\\situacionProblema\\source\\Administrador.csv";
     string pathProducto = "C:\\Users\\crdie\\Documents\\1Semestre_ITESM\\Pensamiento Computacional Orientado a Objetos\\Scripts\\situacionProblema\\source\\Productos.csv";
     string pathCompra_Product = "C:\\Users\\crdie\\Documents\\1Semestre_ITESM\\Pensamiento Computacional Orientado a Objetos\\Scripts\\situacionProblema\\source\\Comprador-Productos.csv";
     string aa;
     //Mapa para los path
     map<string, string> mapaPath;
-    mapaPath["A"] = pathAdmin;
     mapaPath["C"] = pathComprador;
     mapaPath["P"] = pathProveedor;
     
@@ -39,7 +37,7 @@ int main() {
     string opt = "";
     cout<<"-------Bienvenido al Sitema de Compras Amaxion-------"<<endl;
     while (true){
-        cout<<"Ingresa el codigo de acuerdo a quien seas: "<<endl<<"A->Administrador"<<endl<<"C->Comprador"<<endl<<"P->Proveedor"<<endl;
+        cout<<"Ingresa el codigo de acuerdo a quien seas: "<<endl<<"C->Comprador"<<endl<<"P->Proveedor"<<endl;
         cin>>opt;
         if (mapaPath.find(opt) != mapaPath.end())
         {
@@ -267,9 +265,8 @@ int main() {
                                     }else if(opt_editar == "2"){//Arreglar bug
                                         while(true){
                                             cout<<"Digita la nueva categoria: ";
-                                            cin.ignore();
-                                            getline(cin, new_value);
-                                            //cout<<"new: "<<new_value<<endl;
+                                            cin>>new_value;
+                                            cout<<"new: "<<new_value<<endl;
                                             if (mapCategorias.find(new_value) != mapCategorias.end()){ //Se encuentra
                                                 break;
                                             }else{
