@@ -9,10 +9,10 @@
 using namespace std;
 
 int main() {
-    string pathProveedor = "C:\\Users\\crdie\\Documents\\1Semestre_ITESM\\Pensamiento Computacional Orientado a Objetos\\Scripts\\situacionProblema\\source\\Proveedor.csv";
-    string pathComprador = "C:\\Users\\crdie\\Documents\\1Semestre_ITESM\\Pensamiento Computacional Orientado a Objetos\\Scripts\\situacionProblema\\source\\Comprador.csv";
-    string pathProducto = "C:\\Users\\crdie\\Documents\\1Semestre_ITESM\\Pensamiento Computacional Orientado a Objetos\\Scripts\\situacionProblema\\source\\Productos.csv";
-    string pathCompra_Product = "C:\\Users\\crdie\\Documents\\1Semestre_ITESM\\Pensamiento Computacional Orientado a Objetos\\Scripts\\situacionProblema\\source\\Comprador-Productos.csv";
+    string pathProveedor = "Proveedor.csv";
+    string pathComprador = "Comprador.csv";
+    string pathProducto = "Productos.csv";
+    string pathCompra_Product = "Comprador-Productos.csv";
     string aux_exit;
     //Mapa para los path
     map<string, string> mapaPath;
@@ -35,7 +35,7 @@ int main() {
     SaverMannager saver = SaverMannager(pathProveedor);
     //Designing the interaction with the user
     string opt = "";
-    cout<<"-------Bienvenido al Sitema de Compras Amaxion-------"<<endl;
+    cout<<"-------Bienvenido al Sitema de Compras Amaxions-------"<<endl;
     while (true){
         cout<<"Ingresa el codigo de acuerdo a quien seas: "<<endl<<"C->Comprador"<<endl<<"P->Proveedor"<<endl;
         cin>>opt;
@@ -353,7 +353,7 @@ int main() {
         break;
     }
     cout<<"Gracias por usar Amaxion!"<<endl<<"Hasta luego!";
-    
+
     cin>>aux_exit;//Para que no cierre el programa al mostrar el último mensaje
     return 0;
 }

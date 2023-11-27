@@ -13,3 +13,10 @@ los compradores.
 
 
 Areas de mejora: Interfaz gráfica, registro de usuario, eliminar productos.
+
+
+
+-Ejecución: 
+
+Solo ejecuta el archivo mi_programa.exe en la misma carpeta que los csv para evitar conflictos en la lectura y escritura 
+de datos.

@@ -7,7 +7,7 @@
 #include "Comprador.h"
 
 SaverMannager::SaverMannager(){
-    path = "C:\\Users\\crdie\\Documents\\1Semestre_ITESM\\Pensamiento Computacional Orientado a Objetos\\Scripts\\situacionProblema\\source\\data\\Comprador.csv";
+    path = "Comprador.csv";
 }
 
 SaverMannager::SaverMannager(std::string path){
